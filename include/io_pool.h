@@ -17,7 +17,7 @@ private:
     size_t next_io_service_;//连接中下一个可使用的io_service
 
 public:
-    explicit io_pool(size_t pool_size) ;
+    explicit io_pool(size_t pool_size);
     void run();
     void stop();
     boost::asio::io_service & get_io_service();

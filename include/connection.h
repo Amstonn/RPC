@@ -6,6 +6,7 @@
 #include <boost/asio.hpp>
 #include <boost/asio/deadline_timer.hpp>
 #include "constvars.h"
+#include "router.h"
 
 using namespace std;
 using boost::asio::ip::tcp;
@@ -23,25 +24,26 @@ private:
     uint64_t req_id_;
     string write_msg_;
     boost::asio::deadline_timer timer_;
-    size_t conn_id=0;
+    size_t timeout_seconds_;
+    size_t conn_id = 0;
     atomic_bool has_closed_;//多线程环境下安全处理bool值
 
     void read_head();
-    void read_body();
+    void read_body(size_t size);
     void reset_timer();
     void cancel_timer();
     void close();
 public:
-    Connection();
+    Connection(boost::asio::io_service& io_service,std::size_t timeout_seconds);
     Connection(Connection &) = delete;
     Connection & operator = (Connection &) = delete;
     ~Connection();
     void start();
     tcp::socket & socket();
     bool has_closed() const;
-    void response();
+    void response(string data);
     void set_conn_id(int64_t id);
-    int64_t conn_id();
+    int64_t get_conn_id();
 };
 }
 }

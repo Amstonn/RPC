@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project(rpc-lib)
+set(LIBRARY_OUTPUT_DIRECTORY ${ROOTDIR}/lib)
+file(GLOB LIBSRC ${ROOTDIR}/src/*.cpp)
+add_library(easyrpc SHARED ${LIBSRC})

@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project(rpc-client)
+link_libraries(${ROOTDIR}/lib)
+add_executable(rpc-client ${CMAKE_CURRENT_SOURCE_DIR}/rpc-client-main.cpp)
+target_link_libraries(rpc-client easyrpc)
